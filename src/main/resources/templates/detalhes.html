@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalhes do Filme</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/theme.js"></script>
+</head>
+<body>
+    <button id="btn-tema" onclick="alternarTema()">🌙 Tema Escuro</button>
+    <h1 th:text="${filme.titulo}"></h1>
+    <p><strong>Gênero:</strong> <span th:text="${filme.genero}"></span></p>
+    <p><strong>Ano:</strong> <span th:text="${filme.anoLancamento}"></span></p>
+    <p><strong>Sinopse:</strong> <span th:text="${filme.sinopse}"></span></p>
+
+    <hr/>
+    <h3>Adicionar Análise</h3>
+    <form th:action="@{/filmes/detalhes/{id}/analise(id=${filme.id})}" method="post">
+      <label>Sua Análise:</label><br/>
+      <textarea name="analise" rows="3" cols="30"></textarea><br/>
+      <label>Nota (0-10):</label>
+      <input type="number" name="nota" step="0.1" />
+      <br/>
+      <button type="submit">Enviar Análise</button>
+    </form>
+
+    <hr/>
+    <h3>Comentários e Avaliações</h3>
+    <ul>
+      <li th:each="analise : ${filme.analises}">
+        <strong th:text="'Nota: ' + ${analise.nota}"></strong> -
+        <span th:text="${analise.analise}"></span>
+      </li>
+    </ul>
+
+    <a href="/filmes">Voltar para a lista</a>
+</body>
+</html>
