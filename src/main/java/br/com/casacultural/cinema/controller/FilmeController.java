@@ -55,4 +55,10 @@ public class FilmeController {
         model.addAttribute("filme", filme);
         return "edicao";
     }
+
+    @PostMapping("/excluir/{id}")
+    public String excluirFilme(@PathVariable Integer id) {
+        filmeService.excluir(id);
+        return "redirect:/filmes";
+    }
 }

@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Filme</title>
     <link rel="stylesheet" href="/style.css">
     <script src="/theme.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <button id="btn-tema" onclick="alternarTema()">🌙 Tema Escuro</button>
-    <h1>Novo Filme (Via API REST)</h1>
-    <form id="formCadastro">
-        <label>Título:</label> <input type="text" id="titulo" required /><br/>
-        <label>Sinopse:</label> <input type="text" id="sinopse" required /><br/>
-        <label>Gênero:</label> <input type="text" id="genero" required /><br/>
-        <label>Ano:</label> <input type="number" id="anoLancamento" required /><br/>
-        <button type="submit">Salvar Filme</button>
+
+    <h1>Cadastrar Novo Filme</h1>
+
+    <form th:action="@{/filmes/cadastrar}" th:object="${filme}" method="post">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" th:field="*{titulo}" required />
+
+        <label for="sinopse">Sinopse:</label>
+        <textarea id="sinopse" th:field="*{sinopse}" rows="4" required></textarea>
+
+        <label for="genero">Gênero:</label>
+        <input type="text" id="genero" th:field="*{genero}" required />
+
+        <label for="anoLancamento">Ano de Lançamento:</label>
+        <input type="number" id="anoLancamento" th:field="*{anoLancamento}" required />
+
+        <button type="submit" class="btn">Salvar Filme</button>
     </form>
-    <a href="/filmes">Voltar</a>
-    <script>
-        $(document).ready(function() {
-            $('#formCadastro').submit(function(event) {
-                event.preventDefault();
 
-                var filme = {
-                    titulo: $('#titulo').val(),
-                    sinopse: $('#sinopse').val(),
-                    genero: $('#genero').val(),
-                    anoLancamento: $('#anoLancamento').val()
-                };
-
-                $.ajax({
-                    url: '/api/filmes',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(filme),
-                    success: function() {
-                        alert('Filme cadastrado com sucesso!');
-                        window.location.href = '/filmes';
-                    },
-                    error: function() {
-                        alert('Erro ao cadastrar filme.');
-                    }
-                });
-            });
-        });
-    </script>
+    <br>
+    <a href="/filmes" class="btn btn-danger">Cancelar e Voltar</a>
 </body>
 </html>
