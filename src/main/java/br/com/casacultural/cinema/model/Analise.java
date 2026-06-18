@@ -8,7 +8,7 @@ public class Analise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String analise;
     private double nota;

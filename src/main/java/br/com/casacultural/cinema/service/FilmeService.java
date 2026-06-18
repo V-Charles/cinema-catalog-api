@@ -26,15 +26,15 @@ public class FilmeService {
         return filmeRepository.save(filme);
     }
 
-    public Filme buscarPorId(int id) {
+    public Filme buscarPorId(Integer id) {
         return filmeRepository.findById(id).orElse(null);
     }
 
-    public void excluir(int id) {
+    public void excluir(Integer id) {
         filmeRepository.deleteById(id);
     }
 
-    public Analise adicionarAnalise(int idFilme, Analise analise) {
+    public Analise adicionarAnalise(Integer idFilme, Analise analise) {
         Filme filme = buscarPorId(idFilme);
         if (filme != null) {
             analise.setFilme(filme);

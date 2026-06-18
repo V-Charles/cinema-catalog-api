@@ -34,14 +34,14 @@ public class FilmeController {
     }
 
     @GetMapping("/detalhes/{id}")
-    public String detalhesFilme(@PathVariable int id, Model model) {
+    public String detalhesFilme(@PathVariable Integer id, Model model) {
         Filme filme = filmeService.buscarPorId(id);
         model.addAttribute("filme", filme);
         return "detalhes";
     }
 
     @PostMapping("/detalhes/{id}/analise")
-    public String adicionarAnalise(@PathVariable int id,
+    public String adicionarAnalise(@PathVariable Integer id,
                                    @RequestParam String analise,
                                    @RequestParam double nota) {
         Analise novaAnalise = new Analise(analise, nota);
@@ -50,7 +50,7 @@ public class FilmeController {
     }
 
     @GetMapping("/editar/{id}")
-    public String formEdicao(@PathVariable int id, Model model) {
+    public String formEdicao(@PathVariable Integer id, Model model) {
         Filme filme = filmeService.buscarPorId(id);
         model.addAttribute("filme", filme);
         return "edicao";
