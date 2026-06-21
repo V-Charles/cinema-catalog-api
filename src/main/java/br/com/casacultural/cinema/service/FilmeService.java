@@ -27,7 +27,8 @@ public class FilmeService {
     }
 
     public Filme buscarPorId(Integer id) {
-        return filmeRepository.findById(id).orElse(null);
+        return filmeRepository.findByIdWithAnalises(id)
+                .orElseThrow(() -> new IllegalArgumentException("Filme não encontrado"));
     }
 
     public void excluir(Integer id) {
